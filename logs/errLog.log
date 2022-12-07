@@ -1,0 +1,4 @@
+20221206	17:49:30	04fa55d2-ee91-4e42-9f94-e3895799cb90	Error: Not allowed by CORS	OPTIONS	/	https://www.google.com
+20221206	17:49:30	b7230ba1-53b0-4594-b617-10dfc02d355e	Error: Not allowed by CORS	GET	/	https://www.google.com
+20221206	17:51:20	895f4738-6adb-487f-99fd-51f850237d90	Error: Not allowed by CORS	OPTIONS	/	https://master.djla59a3lt5w9.amplifyapp.com
+20221206	17:51:20	2b681ff0-695f-40ce-b87f-5300b15380af	Error: Not allowed by CORS	GET	/	https://master.djla59a3lt5w9.amplifyapp.com
