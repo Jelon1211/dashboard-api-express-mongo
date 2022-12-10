@@ -2,3 +2,10 @@
 20221206	17:49:30	b7230ba1-53b0-4594-b617-10dfc02d355e	Error: Not allowed by CORS	GET	/	https://www.google.com
 20221206	17:51:20	895f4738-6adb-487f-99fd-51f850237d90	Error: Not allowed by CORS	OPTIONS	/	https://master.djla59a3lt5w9.amplifyapp.com
 20221206	17:51:20	2b681ff0-695f-40ce-b87f-5300b15380af	Error: Not allowed by CORS	GET	/	https://master.djla59a3lt5w9.amplifyapp.com
+20221210	19:00:55	22a65cbc-76c7-4a4f-950e-af8684624bc3	ValidationError: User validation failed: roles: Cast to Boolean failed for value "[ 'Employee' ]" (type Array) at path "roles" because of "CastError"	POST	/users	undefined
+20221210	19:02:34	229c90d0-8e07-407f-be7a-891274c27fd1	ValidationError: User validation failed: roles: Cast to Boolean failed for value "[ 'Employee' ]" (type Array) at path "roles" because of "CastError"	POST	/users	undefined
+20221210	19:07:48	7d7c75ae-ba68-41d0-984c-e15d7cb1ffa2	SyntaxError: Unexpected token } in JSON at position 56	POST	/users	undefined
+20221210	19:13:07	688fba55-3208-40f8-8fa2-489d5d2356ee	CastError: Cast to ObjectId failed for value "6394ca2eafcee777e5de14cb1" (type string) at path "_id" for model "User"	PATCH	/users	undefined
+20221210	19:13:29	b0fbbe38-8ca1-48ff-942f-99b4f613e920	SyntaxError: Unexpected token { in JSON at position 7	PATCH	/users	undefined
+20221210	19:16:09	15e38a56-698e-41fd-95de-41e8c9d651f6	SyntaxError: Unexpected string in JSON at position 119	POST	/users	undefined
+20221210	19:20:37	ffa7f652-469b-4a85-924e-1cdb0dc10a2e	SyntaxError: Unexpected token , in JSON at position 184	DELETE	/users	undefined
