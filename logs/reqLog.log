@@ -49,3 +49,7 @@
 20221210	19:37:49	c0c301a1-cced-4e6a-bbc9-deb7b2c4d14e	GET	/notes	undefined
 20221210	19:37:51	21904137-bedc-4ded-aa86-332438cc4524	GET	/note	undefined
 20221210	19:38:42	e1ac1bda-f2a8-4dda-a8fd-2032d1df9508	GET	/note	undefined
+20221210	19:41:01	102ba2ee-b06c-4f49-b8b6-ddba8c5c9f5f	GET	/	undefined
+20221210	19:41:04	1933d688-c17f-4a63-a8d1-60f0c8dc20c4	GET	/user	undefined
+20221210	19:41:07	8a620b38-4c48-4c57-84d7-23fd90d83d01	GET	/users	undefined
+20221210	19:41:12	18b51f7a-decf-452c-ab91-99f3ac68c61b	GET	/notes	undefined
