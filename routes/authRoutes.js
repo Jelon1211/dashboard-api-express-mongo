@@ -1,14 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const usersController = require('../controllers/usersController')
-const verifyJWT = require('../middleware/verifyJWT')
-
-router.use(verifyJWT)
+const authController = require('../controllers/authController')
+const loginLimiter = require('../middleware/loginLimiter')
 
 router.route('/')
-    .get(usersController.getAllUsers)
-    .post(usersController.createNewUser)
-    .patch(usersController.updateUser)
-    .delete(usersController.deleteUser)
+    .post(loginLimiter, authController.login)
+
+router.route('/refresh')
+    .get(authController.refresh)
+
+router.route('/logout')
+    .post(authController.logout)
 
 module.exports = router

@@ -9,3 +9,7 @@
 20221210	19:13:29	b0fbbe38-8ca1-48ff-942f-99b4f613e920	SyntaxError: Unexpected token { in JSON at position 7	PATCH	/users	undefined
 20221210	19:16:09	15e38a56-698e-41fd-95de-41e8c9d651f6	SyntaxError: Unexpected string in JSON at position 119	POST	/users	undefined
 20221210	19:20:37	ffa7f652-469b-4a85-924e-1cdb0dc10a2e	SyntaxError: Unexpected token , in JSON at position 184	DELETE	/users	undefined
+20221212	20:06:14	11031bd2-459b-4ee4-96a5-c9ce0e62a309	SyntaxError: Unexpected token } in JSON at position 59	GET	/auth	undefined
+20221212	20:06:33	757ccb6f-1c86-413d-914a-696ba7a74c0e	SyntaxError: Unexpected token } in JSON at position 59	POST	/auth	undefined
+20221212	20:07:35	7674959d-5bb6-4650-9078-ad944bf7bfcf	SyntaxError: Unexpected token } in JSON at position 59	POST	/auth	undefined
+20221212	20:08:20	9381f7df-6b0d-4312-94ed-e3d1a9e73d76	SyntaxError: Unexpected token } in JSON at position 59	POST	/auth	undefined
