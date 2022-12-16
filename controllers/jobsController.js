@@ -1,7 +1,6 @@
-const User = require('../models/User')
 const Note = require('../models/Note')
 const Job = require('../models/Job')
-const bcrypt = require('bcrypt')
+// const bcrypt = require('bcrypt')
 
 // @desc Get all jobs
 // @route GET /jobs
@@ -39,9 +38,7 @@ const createNewJob = async (req, res) => {
     // // Hash password 
     // const hashedPwd = await bcrypt.hash(password, 10) // salt rounds
 
-    // const jobObject = (!Array.isArray(roles) || !roles.length)
-    //     ? { name, "password": hashedPwd }
-    //     : { name, "password": hashedPwd, roles }
+    const jobObject = {name}
 
     // Create and store new job 
     const job = await Job.create(jobObject)
@@ -57,10 +54,10 @@ const createNewJob = async (req, res) => {
 // @route PATCH /jobs
 // @access Private
 const updateJob = async (req, res) => {
-    const { id, jobname, roles, active, password } = req.body
+    const { id, name} = req.body
 
     // Confirm data 
-    if (!id || !jobname || !Array.isArray(roles) || !roles.length || typeof active !== 'boolean') {
+    if (!id || !name) {
         return res.status(400).json({ message: 'All fields except password are required' })
     }
 
@@ -72,25 +69,25 @@ const updateJob = async (req, res) => {
     }
 
     // Check for duplicate 
-    const duplicate = await Job.findOne({ jobname }).collation({ locale: 'en', strength: 2 }).lean().exec()
+    const duplicate = await Job.findOne({ name }).collation({ locale: 'en', strength: 2 }).lean().exec()
 
     // Allow updates to the original job 
     if (duplicate && duplicate?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate jobname' })
+        return res.status(409).json({ message: 'Duplicate name' })
     }
 
-    job.jobname = jobname
-    job.roles = roles
-    job.active = active
+    job.name = name
+    // job.roles = roles
+    // job.active = active
 
-    if (password) {
-        // Hash password 
-        job.password = await bcrypt.hash(password, 10) // salt rounds 
-    }
+    // if (password) {
+    //     // Hash password 
+    //     job.password = await bcrypt.hash(password, 10) // salt rounds 
+    // }
 
     const updatedJob = await job.save()
 
-    res.json({ message: `${updatedJob.jobname} updated` })
+    res.json({ message: `${updatedJob.name} updated` })
 }
 
 // @desc Delete a job
@@ -119,7 +116,7 @@ const deleteJob = async (req, res) => {
 
     const result = await job.deleteOne()
 
-    const reply = `Jobname ${result.jobname} with ID ${result._id} deleted`
+    const reply = `Name ${result.name} with ID ${result._id} deleted`
 
     res.json(reply)
 }
