@@ -1,7 +1,7 @@
 {
   "name": "dj-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Api for e-commerce dashboard",
   "main": "server.js",
   "scripts": {
     "start": "node server",

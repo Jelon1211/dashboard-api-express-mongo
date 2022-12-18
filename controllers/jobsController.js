@@ -1,4 +1,4 @@
-const Note = require('../models/Note')
+const Candidate = require('../models/Candidate')
 const Job = require('../models/Job')
 // const bcrypt = require('bcrypt')
 
@@ -101,10 +101,10 @@ const deleteJob = async (req, res) => {
         return res.status(400).json({ message: 'Job ID Required' })
     }
 
-    // Does the job still have assigned notes?
-    const note = await Note.findOne({ job: id }).lean().exec()
-    if (note) {
-        return res.status(400).json({ message: 'Job has assigned notes' })
+    // Does the job still have assigned candidates?
+    const candidate = await Candidate.findOne({ job: id }).lean().exec()
+    if (candidate) {
+        return res.status(400).json({ message: 'Job has assigned candidates' })
     }
 
     // Does the job exist to delete?
