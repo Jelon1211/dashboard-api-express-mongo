@@ -94,7 +94,7 @@ const updateUser = async (req, res) => {
     res.json({ message: `${updatedUser.username} updated` })
 }
 
-// @desc Delete a use
+// @desc Delete a user
 // @route DELETE /users
 // @access Private
 const deleteUser = async (req, res) => {
