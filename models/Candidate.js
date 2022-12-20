@@ -8,7 +8,7 @@ const candidateSchema = new mongoose.Schema(
             required: true,
         },
         date: {
-            type: String,
+            type: Date,
             required: true,
         },
         shortdescription: {
@@ -29,10 +29,10 @@ const candidateSchema = new mongoose.Schema(
 }
 );
 
-candidateSchema.plugin(AutoIncrement, {
-    inc_field: 'ticket',
-    id: 'ticketNums',
-    start_seq: 500
-})
+// candidateSchema.plugin(AutoIncrement, {
+//     inc_field: 'ticket',
+//     id: 'ticketNums',
+//     start_seq: 500
+// })
 
 module.exports = mongoose.model('Candidate', candidateSchema)

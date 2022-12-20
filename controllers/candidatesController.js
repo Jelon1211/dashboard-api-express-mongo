@@ -16,34 +16,35 @@ const getAllCandidates = async (req, res) => {
     // Add username to each candidate before sending the response 
     // See Promise.all with map() here: https://youtu.be/4lqJBBEpjRE 
     // You could also do this with a for...of loop
-    const candidatesWithUser = await Promise.all(candidates.map(async (candidate) => {
-        const user = await User.findById(candidate.user).lean().exec()
-        return { ...candidate, username: user.username }
-    }))
+    // Noice but leave it here for now
+    // const candidatesWithUser = await Promise.all(candidates.map(async (candidate) => {
+    //     const user = await User.findById(candidate.user).lean().exec()
+    //     return { ...candidate, username: user.username }
+    // }))
 
-    res.json(candidatesWithUser)
+    res.json(candidates)
 }
 
 // @desc Create new candidate
 // @route POST /candidates
 // @access Private
 const createNewCandidate = async (req, res) => {
-    const { user, title, text } = req.body
+    const { name, date, shortdescription, longdescription, logo } = req.body
 
     // Confirm data
-    if (!user || !title || !text) {
+    if (!name || !date || !shortdescription || !longdescription || !logo) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
-    // Check for duplicate title
-    const duplicate = await Candidate.findOne({ title }).collation({ locale: 'en', strength: 2 }).lean().exec()
+    // Check for duplicate title - do not need now
+    // const duplicate = await Candidate.findOne({ title }).collation({ locale: 'en', strength: 2 }).lean().exec()
 
-    if (duplicate) {
-        return res.status(409).json({ message: 'Duplicate candidate title' })
-    }
+    // if (duplicate) {
+    //     return res.status(409).json({ message: 'Duplicate candidate title' })
+    // }
 
     // Create and store the new user 
-    const candidate = await Candidate.create({ user, title, text })
+    const candidate = await Candidate.create({ name, date, shortdescription, longdescription, logo })
 
     if (candidate) { // Created 
         return res.status(201).json({ message: 'New candidate created' })
@@ -57,10 +58,10 @@ const createNewCandidate = async (req, res) => {
 // @route PATCH /candidates
 // @access Private
 const updateCandidate = async (req, res) => {
-    const { id, user, title, text, completed } = req.body
+    const { id, name, date, shortdescription, longdescription, logo } = req.body
 
     // Confirm data
-    if (!id || !user || !title || !text || typeof completed !== 'boolean') {
+    if (!id || !name || !date || !shortdescription || !longdescription || !logo) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
@@ -71,22 +72,23 @@ const updateCandidate = async (req, res) => {
         return res.status(400).json({ message: 'Candidate not found' })
     }
 
-    // Check for duplicate title
-    const duplicate = await Candidate.findOne({ title }).collation({ locale: 'en', strength: 2 }).lean().exec()
+    // Check for duplicate title - do not need now
+    // const duplicate = await Candidate.findOne({ title }).collation({ locale: 'en', strength: 2 }).lean().exec()
 
     // Allow renaming of the original candidate 
-    if (duplicate && duplicate?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate candidate title' })
-    }
+    // if (duplicate && duplicate?._id.toString() !== id) {
+    //     return res.status(409).json({ message: 'Duplicate candidate title' })
+    // }
 
-    candidate.user = user
-    candidate.title = title
-    candidate.text = text
-    candidate.completed = completed
+    candidate.name = name
+    candidate.date = date
+    candidate.shortdescription = shortdescription
+    candidate.longdescription = longdescription
+    candidate.logo = logo
 
     const updatedCandidate = await candidate.save()
 
-    res.json(`'${updatedCandidate.title}' updated`)
+    res.json(`'${updatedCandidate.name}' updated`)
 }
 
 // @desc Delete a candidate
@@ -109,7 +111,7 @@ const deleteCandidate = async (req, res) => {
 
     const result = await candidate.deleteOne()
 
-    const reply = `Candidate '${result.title}' with ID ${result._id} deleted`
+    const reply = `Candidate '${result.name}' with ID ${result._id} deleted`
 
     res.json(reply)
 }
