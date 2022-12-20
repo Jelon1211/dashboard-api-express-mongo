@@ -14,19 +14,19 @@ const login = async (req, res) => {
 
     const foundUser = await User.findOne({ username }).exec()
 
-    if (!foundUser || !foundUser.active) {
-        return res.status(401).json({ message: 'Unauthorized' })
+    if (!foundUser) {
+        return res.status(401).json({ message: 'Unauthorized - User not found' })
     }
 
     const match = await bcrypt.compare(password, foundUser.password)
 
-    if (!match) return res.status(401).json({ message: 'Unauthorized' })
+    if (!match) return res.status(401).json({ message: 'Unauthorized - Passwords do not match' })
 
     const accessToken = jwt.sign(
         {
             "UserInfo": {
                 "username": foundUser.username,
-                "roles": foundUser.roles
+                // "roles": foundUser.roles
             }
         },
         process.env.ACCESS_TOKEN_SECRET,
@@ -57,7 +57,7 @@ const login = async (req, res) => {
 const refresh = (req, res) => {
     const cookies = req.cookies
 
-    if (!cookies?.jwt) return res.status(401).json({ message: 'Unauthorized' })
+    if (!cookies?.jwt) return res.status(401).json({ message: 'Unauthorized - Cookie has expired' })
 
     const refreshToken = cookies.jwt
 
@@ -69,13 +69,13 @@ const refresh = (req, res) => {
 
             const foundUser = await User.findOne({ username: decoded.username }).exec()
 
-            if (!foundUser) return res.status(401).json({ message: 'Unauthorized' })
+            if (!foundUser) return res.status(401).json({ message: 'Unauthorized - User not found again' })
 
             const accessToken = jwt.sign(
                 {
                     "UserInfo": {
                         "username": foundUser.username,
-                        "roles": foundUser.roles
+                        // "roles": foundUser.roles
                     }
                 },
                 process.env.ACCESS_TOKEN_SECRET,
