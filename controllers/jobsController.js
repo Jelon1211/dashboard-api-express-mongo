@@ -21,30 +21,30 @@ const getAllJobs = async (req, res) => {
 // @route POST /jobs
 // @access Private
 const createNewJob = async (req, res) => {
-    const { name } = req.body
+    const { title, date, shortdescription, longdescription, logo } = req.body
 
     // Confirm data
-    if (!name) {
+    if (!title || !date || !shortdescription || !longdescription || !logo) {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
-    // Check for duplicate name
-    const duplicate = await Job.findOne({ name }).collation({ locale: 'en', strength: 2 }).lean().exec()
+    // Check for duplicate name - it can duplicate
+    // const duplicate = await Job.findOne({ title }).collation({ locale: 'en', strength: 2 }).lean().exec()
 
-    if (duplicate) {
-        return res.status(409).json({ message: 'Duplicate name' })
-    }
+    // if (duplicate) {
+    //     return res.status(409).json({ message: 'Duplicate name' })
+    // }
 
     // // Hash password 
     // const hashedPwd = await bcrypt.hash(password, 10) // salt rounds
 
-    const jobObject = {name}
+    const jobObject = {title, date, shortdescription, longdescription, logo}
 
     // Create and store new job 
     const job = await Job.create(jobObject)
 
     if (job) { //created 
-        res.status(201).json({ message: `New job ${name} created` })
+        res.status(201).json({ message: `New job ${title} created` })
     } else {
         res.status(400).json({ message: 'Invalid job data received' })
     }
@@ -54,11 +54,11 @@ const createNewJob = async (req, res) => {
 // @route PATCH /jobs
 // @access Private
 const updateJob = async (req, res) => {
-    const { id, name} = req.body
+    const { id, title, date, shortdescription, longdescription, logo} = req.body
 
     // Confirm data 
-    if (!id || !name) {
-        return res.status(400).json({ message: 'All fields except password are required' })
+    if (!id || !title || !date || !shortdescription || !longdescription || !logo) {
+        return res.status(400).json({ message: 'All fields are required to upade a job' })
     }
 
     // Does the job exist to update?
@@ -68,17 +68,19 @@ const updateJob = async (req, res) => {
         return res.status(400).json({ message: 'Job not found' })
     }
 
-    // Check for duplicate 
-    const duplicate = await Job.findOne({ name }).collation({ locale: 'en', strength: 2 }).lean().exec()
+    // Check for duplicate - do not need here 
+    // const duplicate = await Job.findOne({ name }).collation({ locale: 'en', strength: 2 }).lean().exec()
 
     // Allow updates to the original job 
-    if (duplicate && duplicate?._id.toString() !== id) {
-        return res.status(409).json({ message: 'Duplicate name' })
-    }
+    // if (duplicate && duplicate?._id.toString() !== id) {
+    //     return res.status(409).json({ message: 'Duplicate name' })
+    // }
 
-    job.name = name
-    // job.roles = roles
-    // job.active = active
+    job.title = title
+    job.date = date
+    job.shortdescription = shortdescription
+    job.longdescription = longdescription
+    job.logo = logo
 
     // if (password) {
     //     // Hash password 
@@ -87,7 +89,7 @@ const updateJob = async (req, res) => {
 
     const updatedJob = await job.save()
 
-    res.json({ message: `${updatedJob.name} updated` })
+    res.json({ message: `${updatedJob.title} updated` })
 }
 
 // @desc Delete a job
@@ -116,7 +118,7 @@ const deleteJob = async (req, res) => {
 
     const result = await job.deleteOne()
 
-    const reply = `Name ${result.name} with ID ${result._id} deleted`
+    const reply = `Name ${result.title} with ID ${result._id} deleted`
 
     res.json(reply)
 }
