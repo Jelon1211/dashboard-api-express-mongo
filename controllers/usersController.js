@@ -58,10 +58,10 @@ const createNewUser = async (req, res) => {
 // @route PATCH /users
 // @access Private
 const updateUser = async (req, res) => {
-    const { id, username, roles, active, password } = req.body
+    const { id, firstname, lastname, username, password } = req.body
 
     // Confirm data 
-    if (!id || !username || !Array.isArray(roles) || !roles.length || typeof active !== 'boolean') {
+    if (!id || !username || !firstname || !lastname ) {
         return res.status(400).json({ message: 'All fields except password are required' })
     }
 
@@ -81,8 +81,8 @@ const updateUser = async (req, res) => {
     }
 
     user.username = username
-    user.roles = roles
-    user.active = active
+    user.lastname = lastname
+    user.firstname = firstname
 
     if (password) {
         // Hash password 
@@ -91,7 +91,7 @@ const updateUser = async (req, res) => {
 
     const updatedUser = await user.save()
 
-    res.json({ message: `${updatedUser.username} updated` })
+    res.json({ message: `${updatedUser.firstname} updated` })
 }
 
 // @desc Delete a user
