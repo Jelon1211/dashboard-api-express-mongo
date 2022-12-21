@@ -35,7 +35,7 @@ const createNewJob = async (req, res) => {
     //     return res.status(409).json({ message: 'Duplicate name' })
     // }
 
-    // // Hash password 
+    // Hash password 
     // const hashedPwd = await bcrypt.hash(password, 10) // salt rounds
 
     const jobObject = {title, date, shortdescription, longdescription, logo}
