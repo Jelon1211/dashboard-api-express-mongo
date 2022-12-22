@@ -23,7 +23,7 @@ const getAllJobs = async (req, res) => {
 const createNewJob = async (req, res) => {
     const { title, date, shortdescription, longdescription, logo } = req.body
 
-    // Confirm data
+    // Confirm data 
     if (!title || !date || !shortdescription || !longdescription || !logo) {
         return res.status(400).json({ message: 'All fields are required' })
     }
