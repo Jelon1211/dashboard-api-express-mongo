@@ -89,7 +89,7 @@ const refresh = (req, res) => {
 
 // @desc Logout
 // @route POST /auth/logout
-// @access Public - just to clear cookie if exists 
+// @access Public - just to clear cookie if exists
 const logout = (req, res) => {
     const cookies = req.cookies
     if (!cookies?.jwt) return res.sendStatus(204) //No content
