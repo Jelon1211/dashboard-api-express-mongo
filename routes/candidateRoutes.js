@@ -12,4 +12,6 @@ router.route('/')
     .patch(candidatesController.updateCandidate)
     .delete(candidatesController.deleteCandidate)
 
+router.get('/:id', candidatesController.singleCandidate);
+
 module.exports = router
