@@ -12,4 +12,7 @@ router.route('/refresh')
 router.route('/logout')
     .post(authController.logout)
 
+router.route('/user')
+    .post(authController.getUser)
+
 module.exports = router

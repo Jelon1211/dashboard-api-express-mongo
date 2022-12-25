@@ -97,8 +97,15 @@ const logout = (req, res) => {
     res.json({ message: 'Cookie cleared' })
 }
 
+const getUser = async (req, res) =>{
+    const user = await User.findOne(req.params.username);
+
+    res.json(user);
+}
+
 module.exports = {
     login,
     refresh,
-    logout
+    logout,
+    getUser
 }

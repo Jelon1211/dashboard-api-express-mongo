@@ -13,5 +13,4 @@ router.route('/')
    .patch(verifyJWT, usersController.updateUser)
    .delete(verifyJWT, usersController.deleteUser)
 
-
 module.exports = router
