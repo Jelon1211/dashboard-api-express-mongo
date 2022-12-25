@@ -12,4 +12,6 @@ router.route('/')
     .patch(jobsController.updateJob)
     .delete(jobsController.deleteJob)
 
+router.get('/:id', jobsController.singleJob);
+
 module.exports = router

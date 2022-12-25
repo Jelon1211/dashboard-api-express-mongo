@@ -123,9 +123,19 @@ const deleteJob = async (req, res) => {
     res.json(reply)
 }
 
+const singleJob = async (req, res) => {
+    const job = await Job.findById("63a21ecb02d9dcab949df946")
+
+    if(!job){
+        return res.status(404).send("Job not found")
+    }
+    res.json(job)
+}
+
 module.exports = {
     getAllJobs,
     createNewJob,
     updateJob,
-    deleteJob
+    deleteJob,
+    singleJob
 }
