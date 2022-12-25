@@ -97,10 +97,15 @@ const logout = (req, res) => {
     res.json({ message: 'Cookie cleared' })
 }
 
-const getUser = async (req, res) =>{
-    const user = await User.findOne(req.params.username);
 
-    res.json(user);
+// @desc Get single user
+// @route POST / auth/user
+// @access Public - base on login username
+const getUser = async (req, res) =>{
+    const username = req.body.username
+    const user = await User.findOne({username: username}).exec()
+
+    res.json(user)
 }
 
 module.exports = {
