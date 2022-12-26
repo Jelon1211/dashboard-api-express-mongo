@@ -7,6 +7,7 @@ Hello, this is my first API for react app. It's quite simple but it cover all th
 - Password encryption
 - MongoDB and mongoose database support
 - Logging and registering new users
+- All CRUD operations
 
 ## Table of Contents
 
