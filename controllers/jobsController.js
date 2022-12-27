@@ -104,10 +104,10 @@ const deleteJob = async (req, res) => {
     }
 
     // Does the job still have assigned candidates?
-    const candidate = await Candidate.findOne({ job: id }).lean().exec()
-    if (candidate) {
-        return res.status(400).json({ message: 'Job has assigned candidates' })
-    }
+    // const candidate = await Candidate.findOne({ job: id }).lean().exec()
+    // if (candidate) {
+    //     return res.status(400).json({ message: 'Job has assigned candidates' })
+    // }
 
     // Does the job exist to delete?
     const job = await Job.findById(id).exec()
@@ -124,7 +124,7 @@ const deleteJob = async (req, res) => {
 }
 
 const singleJob = async (req, res) => {
-    const job = await Job.findById("63a21ecb02d9dcab949df946")
+    const job = await Job.findById(req.params.id)
 
     if(!job){
         return res.status(404).send("Job not found")

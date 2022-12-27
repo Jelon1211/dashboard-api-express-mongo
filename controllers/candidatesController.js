@@ -117,7 +117,7 @@ const deleteCandidate = async (req, res) => {
 }
 
 const singleCandidate = async (req, res) => {
-    const candidate = await Candidate.findById("63a21ecb02d9dcab949df946")
+    const candidate = await Candidate.findById(req.params.id)
 
     if(!candidate){
         return res.status(404).send("Candidate not found")
