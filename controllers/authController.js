@@ -18,8 +18,8 @@ const login = async (req, res) => {
         return res.status(401).json({ message: 'Unauthorized - User not found' })
     }
 
-    const match = await bcrypt.compare(password, foundUser.password)
-
+    // const match = await bcrypt.compare(password, foundUser.password)
+    const match = foundUser.password.localeCompare(password) === 0
     if (!match) return res.status(401).json({ message: 'Unauthorized - Passwords do not match' })
 
     const accessToken = jwt.sign(
