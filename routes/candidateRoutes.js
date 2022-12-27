@@ -4,7 +4,7 @@ const candidatesController = require('../controllers/candidatesController')
 
 const verifyJWT = require('../middleware/verifyJWT')
 
-router.use(verifyJWT)
+// router.use(verifyJWT)
 
 router.route('/')
     .get(candidatesController.getAllCandidates)
