@@ -46,7 +46,7 @@ const createNewUser = async (req, res) => {
       ? { username, password: hashedPwd }
       : { username, password: hashedPwd, roles };
 
-  const userObject = { firstname, lastname, username, password: hashedPwd };
+  //   const userObject = { firstname, lastname, username, password: hashedPwd };
   // const userObject = {firstname, lastname, username, password};
 
   // Create and store new user
