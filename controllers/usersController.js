@@ -41,12 +41,16 @@ const createNewUser = async (req, res) => {
   // Hash password
   const hashedPwd = await bcrypt.hash(password, 10); // salt rounds
 
-  const userObject =
-    !Array.isArray(roles) || !roles.length
-      ? { username, password: hashedPwd }
-      : { username, password: hashedPwd, roles };
+  //If there are roles register
+  // const userObject =
+  //   !Array.isArray(roles) || !roles.length
+  //     ? { username, password: hashedPwd }
+  //     : { username, password: hashedPwd, roles };
 
-  //   const userObject = { firstname, lastname, username, password: hashedPwd };
+  //No roles register
+  const userObject = { firstname, lastname, username, password: hashedPwd };
+
+  // No hash register
   // const userObject = {firstname, lastname, username, password};
 
   // Create and store new user
